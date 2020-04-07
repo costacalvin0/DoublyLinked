@@ -1,8 +1,8 @@
 //Calvin Costa
 //Project 3
 
-#ifndef DOUBLY_LIST_
-#define DOUBLY_LIST_
+#ifndef DOUBLY_LIST
+#define DOUBLY_LIST
 
 #include "DoubleNode.hpp"
 

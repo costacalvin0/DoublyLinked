@@ -76,7 +76,7 @@ bool DoublyLinkedList<ItemType>::insert(const ItemType& item, const int& positio
     for (int i = 1; i <= position; i++) {
         if (headPtr == nullptr) {
             DoubleNode<ItemType>* placeholderPtr = new DoubleNode<ItemType>()
-        }
+        };
         headPtr = headPtr->getNext();
         insertPtr = headPtr;
     }

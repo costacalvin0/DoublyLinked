@@ -19,7 +19,7 @@ DoublyLinkedList<ItemType>::DoublyLinkedList(): headPtr(nullptr), SizeCount(0)
 {
 }
 
-//NEED TO FIX
+//NEED TO FIX!!!!
 template<class ItemType>
 DoublyLinkedList<ItemType>::DoublyLinkedList(const DoublyLinkedList<ItemType>& aBag): SizeCount(aBag.SizeCount)
 {
@@ -74,9 +74,8 @@ bool DoublyLinkedList<ItemType>::insert(const ItemType& item, const int& positio
     DoubleNode<ItemType>* insertPtr = headPtr;
     
     for (int i = 1; i <= position; i++) {
-        if (headPtr == nullptr) {
-            DoubleNode<ItemType>* placeholderPtr = new DoubleNode<ItemType>()
-        };
+        if (headPtr == nullptr)
+            DoubleNode<ItemType>* placeholderPtr = new DoubleNode<ItemType>();
         headPtr = headPtr->getNext();
         insertPtr = headPtr;
     }
@@ -88,7 +87,7 @@ bool DoublyLinkedList<ItemType>::insert(const ItemType& item, const int& positio
     return true;
 }
 
-//DONE
+//DONE??
 template<class ItemType>
 bool DoublyLinkedList<ItemType>::remove(const int& position)
 {
@@ -108,7 +107,7 @@ bool DoublyLinkedList<ItemType>::remove(const int& position)
  
 }
 
-//DONE
+//DONE??
 template<class ItemType>
 int DoublyLinkedList<ItemType>::getSize() const
 {
@@ -126,7 +125,7 @@ int DoublyLinkedList<ItemType>::getSize() const
     }
 }
 
-//NEED TO FIX
+//NEED TO FIX!!!
 template<class ItemType>
 DoubleNode<ItemType> * DoublyLinkedList<ItemType>::getHeadPtr() const
 {
@@ -134,7 +133,7 @@ DoubleNode<ItemType> * DoublyLinkedList<ItemType>::getHeadPtr() const
     return copyHeadPtr;
 }
 
-//DONE
+//DONE??
 template<class ItemType>
 DoubleNode<ItemType> * DoublyLinkedList<ItemType>::getAtPos(const int& pos) const
 {
@@ -159,7 +158,7 @@ bool DoublyLinkedList<ItemType>::isEmpty() const
     return SizeCount == 0;
 }
 
-//DONE
+//DONE??
 template<class ItemType>
 void DoublyLinkedList<ItemType>::clear()
 {
@@ -179,7 +178,7 @@ void DoublyLinkedList<ItemType>::clear()
      SizeCount = 0;
 }
 
-//DONE
+//DONE??
 template<class ItemType>
 void DoublyLinkedList<ItemType>::display() const
 {
@@ -194,7 +193,7 @@ void DoublyLinkedList<ItemType>::display() const
     }
 }
 
-//DONE
+//DONE??
 template<class ItemType>
 void DoublyLinkedList<ItemType>::displayBackwards() const
 {
@@ -216,7 +215,7 @@ void DoublyLinkedList<ItemType>::displayBackwards() const
     }
 }
 
-//NEED TO FIX
+//NEED TO FIX!!!!
 template<class ItemType>
 DoublyLinkedList<ItemType> DoublyLinkedList<ItemType>::interleave(const DoublyLinkedList<ItemType>& a_list)
 {

@@ -21,7 +21,7 @@ DoubleNode<ItemType>::DoubleNode(): next(nullptr), prev(nullptr)
 @pre:N/A
 @post:Empty Doubly Linked list
 @return:N/A
-DEFAULT CONSTRUCTOR
+ITEM CONSTRUCTOR
 */
 template<class ItemType>
 DoubleNode<ItemType>::DoubleNode(const ItemType& anItem): item(anItem), next(nullptr), prev(nullptr)
@@ -33,7 +33,7 @@ DoubleNode<ItemType>::DoubleNode(const ItemType& anItem): item(anItem), next(nul
 @pre:N/A
 @post:Empty Doubly Linked list
 @return:N/A
-DEFAULT CONSTRUCTOR
+FULL CONSTRUCTOR
 */
 template<class ItemType>
 DoubleNode<ItemType>::DoubleNode(const ItemType& anItem, DoubleNode<ItemType>* nextNodePtr, DoubleNode<ItemType>* prevNodePtr): item(anItem), next(nextNodePtr), prev(prevNodePtr)

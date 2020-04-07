@@ -20,49 +20,14 @@ DoublyLinkedList<ItemType>::DoublyLinkedList(): headPtr(nullptr), SizeCount(0)
 }
 
 /*
- @pre: a doubly linked list passed through reference
- @post: a new doubly linked list which is a copy of the one passed through reference
+ @pre: a doubly linked list header
+ @post: a new doubly linked list which is a copy of the one passed through header
  @return:N/A
  COPY CONSTRUCTOR
- //NEED TO FIX!!!!
  */
 template<class ItemType>
 DoublyLinkedList<ItemType>::DoublyLinkedList(DoubleNode<ItemType>* firstNode): headPtr(firstNode), SizeCount(1)
 {
-    /*
-     DoubleNode<ItemType>* origChainPtr = aBag.headPtr;
-    DoubleNode<ItemType>* newChainPtr = nullptr;
-    DoubleNode<ItemType>* currPtr = nullptr;
-    
-    
-    
-    if (origChainPtr == nullptr) {
-        headPtr = nullptr;
-    }
-    else {
-        newChainPtr = new DoubleNode<ItemType>();
-        newChainPtr->setItem(origChainPtr->getItem());
-        newChainPtr->setNext(nullptr);
-        newChainPtr->setPrev(nullptr);
-        headPtr = newChainPtr;
-        currPtr = headPtr;
-        
-        while (origChainPtr != nullptr)
-              {
-                  origChainPtr = origChainPtr->getNext();
-                  newChainPtr = newChainPtr->getNext();
-                  if (origChainPtr!=nullptr) {
-                      newChainPtr = new DoubleNode<ItemType>();
-                      newChainPtr->setItem(origChainPtr->getItem());
-                      newChainPtr->setNext(nullptr);
-                      newChainPtr->setPrev(currPtr);
-                      currPtr->setNext(newChainPtr);
-                      currPtr = currPtr->getNext();
-                  }
-              }
-        }
-    SizeCount = aBag.SizeCount;
-     */
 }
 
 
@@ -105,9 +70,10 @@ bool DoublyLinkedList<ItemType>::insert(const ItemType& item, const int& positio
         SizeCount++;
         return true;
     }
-    DoubleNode<ItemType>* insertPtr = nullptr;
+    
+    DoubleNode<ItemType>* insertPtr = headPtr;
+    
     for (int i = 1; i < position - 1; i++) {
-        insertPtr = headPtr;
         insertPtr = insertPtr->getNext();
     }
     nodePtr->setNext(insertPtr->getNext());
@@ -128,11 +94,10 @@ bool DoublyLinkedList<ItemType>::insert(const ItemType& item, const int& positio
 
 /*
 @pre:A position passed by reference
-@post: A doublenode has been removed from the list
+@post: A doublenode has been removed from the list at position
 @return: returns true if successful
 REMOVE FUNCTION
 */
-//DONE??
 template<class ItemType>
 bool DoublyLinkedList<ItemType>:: remove(const int& position)
 {
@@ -140,88 +105,73 @@ bool DoublyLinkedList<ItemType>:: remove(const int& position)
         return false;
     }
 
-    DoubleNode<ItemType>* currentPtr = headPtr->getNext();
-    DoubleNode<ItemType>* trailingPtr = headPtr;
-    int currentPosition = 2;
+    DoubleNode<ItemType>* removePtr = headPtr->getNext();
+    DoubleNode<ItemType>* currPtr = headPtr;
+    int removePosition = 2;
 
     if (position == 1) {
 
-        currentPtr->setPrev(nullptr);
+        removePtr->setPrev(nullptr);
+        headPtr->setNext(nullptr);
+        headPtr->setPrev(nullptr);
         delete headPtr;
-        headPtr = currentPtr;
+        headPtr = removePtr;
         SizeCount--;
+    }
+    
+    else {
+        //gets removePtr to position
+        while (removePosition != position) {
 
-    } else {
-        while (currentPosition != position) {
-
-            currentPtr = currentPtr->getNext();
-            trailingPtr = trailingPtr->getNext();
-            currentPosition++;
+            removePtr = removePtr->getNext();
+            currPtr = currPtr->getNext();
+            removePosition++;
         }
-        if (currentPtr->getNext() == nullptr) {
+        //if position is the end node
+        if (removePtr->getNext() == nullptr) {
 
-            currentPtr->setPrev(nullptr);
-            trailingPtr->setNext(nullptr);
-            delete currentPtr;
-            SizeCount--;
-
-        } else if (currentPtr->getNext() != nullptr) {
-
-            DoubleNode<ItemType>* leadingPtr = currentPtr->getNext();
-            currentPtr->setNext(nullptr);
-            currentPtr->setPrev(nullptr);
-            leadingPtr->setPrev(trailingPtr);
-            trailingPtr->setNext(leadingPtr);
-            delete currentPtr;
-            SizeCount--;
+            removePtr->setPrev(nullptr);
+            delete removePtr;
+            currPtr->setNext(nullptr);
             
+            SizeCount--;
+        }
+        //if position is not the end node
+        else if (removePtr->getNext() != nullptr) {
+
+            DoubleNode<ItemType>* leadPtr = removePtr->getNext();
+            removePtr->setNext(nullptr);
+            removePtr->setPrev(nullptr);
+            leadPtr->setPrev(currPtr);
+            currPtr->setNext(leadPtr);
+            delete removePtr;
+            SizeCount--;
         }
     }
     
-    currentPtr = headPtr;
-    while (currentPtr != nullptr) {
-        cout<<currentPtr->getItem();
-        currentPtr = currentPtr->getNext();
-        if (currentPtr == nullptr) {
+    //Outputs the rest of the list
+    removePtr = headPtr;
+    while (removePtr != nullptr) {
+        std::cout<<removePtr->getItem();
+        removePtr = removePtr->getNext();
+        
+        if (removePtr == nullptr) {
             cout<<" "<<endl;
-        } else {
+        }
+        
+        else {
             cout<<' ';
         }
     }
-
     return true;
 }
-/*
-template<class ItemType>
-bool DoublyLinkedList<ItemType>::remove(const int& position)
-{
-    if (position > SizeCount) {
-        return true;
-    }
-    else{
-        DoubleNode<ItemType>* removePtr = headPtr;
-        for (int i = 1; i <= position; i++) {
-            headPtr = headPtr->getNext();
-            removePtr = headPtr;
-        }
-        DoubleNode<ItemType>* nextPtr = removePtr->getNext();
-        DoubleNode<ItemType>* prevPtr = removePtr->getPrev();
-        removePtr->setNext(nullptr);
-        removePtr->setPrev(nullptr);
-        prevPtr->setNext(nextPtr);
-        nextPtr->setPrev(prevPtr);
-        delete removePtr;
-        SizeCount--;
-        return true;
-    }
-}
-*/
+
 /*
 @pre: Any doubly linked list
 @post:size is counted and updated
 @return:int size of the list
+SIZE FUNCTION
 */
-//DONE??
 template<class ItemType>
 int DoublyLinkedList<ItemType>::getSize() const
 {
@@ -246,8 +196,9 @@ int DoublyLinkedList<ItemType>::getSize() const
 @pre: Any Doubly Linked List
 @post:HeadPtr is located and copied
 @return:returns a pointer == headPtr
-*/
 //NEED TO FIX!!!
+HEAD POINTER FUNCTION
+*/
 template<class ItemType>
 DoubleNode<ItemType> * DoublyLinkedList<ItemType>::getHeadPtr() const
 {
@@ -296,16 +247,41 @@ template<class ItemType>
 void DoublyLinkedList<ItemType>::clear()
 {
     DoubleNode<ItemType>* nodeToDeletePtr = headPtr;
-    while (nodeToDeletePtr != nullptr)
+    while (headPtr != nullptr)
     {
-       DoubleNode<ItemType>* curr = nodeToDeletePtr;
-       nodeToDeletePtr = nodeToDeletePtr->getNext();
-       curr->setPrev(nullptr);
-       curr->setNext(nullptr);
-       delete curr;
-    }
-     SizeCount = 0;
+       headPtr = headPtr->getNext();
+
+       // Return node to the system
+       nodeToDeletePtr->setNext(nullptr);
+       nodeToDeletePtr->setPrev(nullptr);
+       delete nodeToDeletePtr;
+       
+       nodeToDeletePtr = headPtr;
+    }  // end while
+    // headPtr is nullptr; nodeToDeletePtr is nullptr
+    SizeCount = 0;
 }
+/*
+ DoubleNode<ItemType>* nodeToDeletePtr = headPtr->getNext();
+ if (nodeToDeletePtr == nullptr) {
+     DoubleNode<ItemType>* curr = headPtr;
+     curr->setNext(nullptr);
+     curr->setPrev(nullptr);
+     curr->setItem(NULL);
+     delete curr;
+     headPtr = nullptr;
+ }
+ while (nodeToDeletePtr != nullptr)
+ {
+    DoubleNode<ItemType>* curr = headPtr;
+    curr->setPrev(nullptr);
+    curr->setNext(nullptr);
+    curr->setItem(NULL);
+    delete curr;
+    headPtr = nodeToDeletePtr;
+    nodeToDeletePtr = nodeToDeletePtr->getNext();
+ }
+ */
 
 /*
 @pre:A doubly linked list
@@ -343,18 +319,19 @@ void DoublyLinkedList<ItemType>::displayBackwards() const
     DoubleNode<ItemType>* endPtr;
     
     while (curPtr != nullptr) {
-        curPtr = curPtr->getNext();
         endPtr = curPtr;
+        curPtr = curPtr->getNext();
+        
     }
     
     while (endPtr != nullptr) {
         std::cout << endPtr->getItem();
         endPtr = endPtr->getPrev();
         if (endPtr == nullptr) {
-            std::cout << ' ';
+            std::cout << '\n';
         }
         else{
-            std::cout <<'\n';
+            std::cout <<' ';
         }
     }
 }
@@ -369,8 +346,63 @@ INTERLEAVE FUNCTION
 template<class ItemType>
 DoublyLinkedList<ItemType> DoublyLinkedList<ItemType>::interleave(const DoublyLinkedList<ItemType>& a_list)
 {
-    //DoubleNode<ItemType>* list1Ptr = headPtr;
-    //DoubleNode<ItemType>* list2Ptr = a_list.headPtr;
+    /*
+    DoubleNode<ItemType>* list1Ptr = headPtr;
+    DoubleNode<ItemType>* list2Ptr = a_list.headPtr;
+    DoublyLinkedList<ItemType>* newList = new DoublyLinkedList<ItemType>();
+    newList.headPtr = headPtr;
+    if (SizeCount == a_list.SizeCount) {
+        for (int i = 1; ; i++) {
+            
+        }
+    }
+    if (SizeCount <= a_list.SizeCount) {
     
-    //SizeCount = SizeCount + a_list.SizeCount;
+    }
+    if (SizeCount >= a_list.SizeCount) {
+        
+    }
+    SizeCount = SizeCount + a_list.SizeCount;
+    */
 }
+
+
+
+
+
+
+
+/* COPY CONSTRUCTOR ALTERNATIVE
+   DoubleNode<ItemType>* origChainPtr = aBag.headPtr;
+   DoubleNode<ItemType>* newChainPtr = nullptr;
+   DoubleNode<ItemType>* currPtr = nullptr;
+   
+   
+   
+   if (origChainPtr == nullptr) {
+       headPtr = nullptr;
+   }
+   else {
+       newChainPtr = new DoubleNode<ItemType>();
+       newChainPtr->setItem(origChainPtr->getItem());
+       newChainPtr->setNext(nullptr);
+       newChainPtr->setPrev(nullptr);
+       headPtr = newChainPtr;
+       currPtr = headPtr;
+       
+       while (origChainPtr != nullptr)
+             {
+                 origChainPtr = origChainPtr->getNext();
+                 newChainPtr = newChainPtr->getNext();
+                 if (origChainPtr!=nullptr) {
+                     newChainPtr = new DoubleNode<ItemType>();
+                     newChainPtr->setItem(origChainPtr->getItem());
+                     newChainPtr->setNext(nullptr);
+                     newChainPtr->setPrev(currPtr);
+                     currPtr->setNext(newChainPtr);
+                     currPtr = currPtr->getNext();
+                 }
+             }
+       }
+   SizeCount = aBag.SizeCount;
+    */

@@ -187,6 +187,10 @@ void DoublyLinkedList<ItemType>::display() const
     while (displayPtr != nullptr) {
         std::cout << displayPtr->getItem();
         displayPtr = displayPtr->getNext();
+        std::cout << ' ';
+    }
+    if (displayPtr == nullptr) {
+        std::cout << '\n';
     }
 }
 
@@ -205,6 +209,10 @@ void DoublyLinkedList<ItemType>::displayBackwards() const
     while (endPtr != nullptr) {
         std::cout << endPtr->getItem();
         endPtr = endPtr->getPrev();
+        std::cout <<' ';
+    }
+    if (endPtr == nullptr) {
+        std::cout << '\n';
     }
 }
 

@@ -9,9 +9,9 @@
 using namespace std;
 
 /*
-@pre
-@post
-@
+@pre:N/A
+@post:Empty Doubly Linked list
+@return:N/A
 */
 //DONE
 template<class ItemType>
@@ -19,6 +19,11 @@ DoublyLinkedList<ItemType>::DoublyLinkedList(): headPtr(nullptr), SizeCount(0)
 {
 }
 
+/*
+ @pre: a doubly linked list passed through reference
+ @post: a new doubly linked list which is a copy of the one passed through reference
+ @return:N/A
+ */
 //NEED TO FIX!!!!
 template<class ItemType>
 DoublyLinkedList<ItemType>::DoublyLinkedList(const DoublyLinkedList<ItemType>& aBag): SizeCount(aBag.SizeCount)
@@ -60,6 +65,11 @@ DoublyLinkedList<ItemType>::DoublyLinkedList(const DoublyLinkedList<ItemType>& a
         }  // end if
 }  // end copy constructor
 
+/*
+ @pre: A doubly linked list
+ @post: deletes doubly linked list
+ @return: N/A
+ */
 //DONE
 template<class ItemType>
 DoublyLinkedList<ItemType>::~DoublyLinkedList()
@@ -67,6 +77,11 @@ DoublyLinkedList<ItemType>::~DoublyLinkedList()
     clear();
 }
 
+/*
+ @pre:An item and position passed by reference
+ @post:A new node is inserted at position with the item
+ @return: returns true if successful
+ */
 //NEED TO FIX
 template<class ItemType>
 bool DoublyLinkedList<ItemType>::insert(const ItemType& item, const int& position)
@@ -87,6 +102,11 @@ bool DoublyLinkedList<ItemType>::insert(const ItemType& item, const int& positio
     return true;
 }
 
+/*
+@pre:A position passed by reference
+@post: A doublenode has been removed from the list
+@return: returns true if successful
+*/
 //DONE??
 template<class ItemType>
 bool DoublyLinkedList<ItemType>::remove(const int& position)
@@ -107,6 +127,11 @@ bool DoublyLinkedList<ItemType>::remove(const int& position)
  
 }
 
+/*
+@pre: Any doubly linked list
+@post:size is counted and updated
+@return:int size of the list
+*/
 //DONE??
 template<class ItemType>
 int DoublyLinkedList<ItemType>::getSize() const
@@ -125,6 +150,11 @@ int DoublyLinkedList<ItemType>::getSize() const
     }
 }
 
+/*
+@pre: Any Doubly Linked List
+@post:HeadPtr is located and copied
+@return:returns a pointer == headPtr
+*/
 //NEED TO FIX!!!
 template<class ItemType>
 DoubleNode<ItemType> * DoublyLinkedList<ItemType>::getHeadPtr() const
@@ -133,6 +163,11 @@ DoubleNode<ItemType> * DoublyLinkedList<ItemType>::getHeadPtr() const
     return copyHeadPtr;
 }
 
+/*
+@pre: A position passed by reference
+@post:a pointer is created pointing at the node in position
+@return:a double node pointer is returned
+*/
 //DONE??
 template<class ItemType>
 DoubleNode<ItemType> * DoublyLinkedList<ItemType>::getAtPos(const int& pos) const
@@ -151,13 +186,23 @@ DoubleNode<ItemType> * DoublyLinkedList<ItemType>::getAtPos(const int& pos) cons
     }
 }
 
+/*
+@pre:Any Doubly Linked List
+@post: checks if List is empty
+@return: returns true if empty
+*/
 //DONE
 template<class ItemType>
 bool DoublyLinkedList<ItemType>::isEmpty() const
 {
-    return SizeCount == 0;
+    return headPtr == nullptr;
 }
 
+/*
+@pre: Any Doubly Linked List
+@post:Empty Doubly Linked List
+@return:N/A
+*/
 //DONE??
 template<class ItemType>
 void DoublyLinkedList<ItemType>::clear()
@@ -178,6 +223,11 @@ void DoublyLinkedList<ItemType>::clear()
      SizeCount = 0;
 }
 
+/*
+@pre:A doubly linked list
+@post:prints items of list in order
+@return:N/A
+*/
 //DONE??
 template<class ItemType>
 void DoublyLinkedList<ItemType>::display() const
@@ -194,9 +244,13 @@ void DoublyLinkedList<ItemType>::display() const
             std::cout << ' ';
         }
     }
-    
 }
 
+/*
+@pre:A doubly linked list
+@post:printed items of doubly linked list backwards
+@return:N/A
+*/
 //DONE??
 template<class ItemType>
 void DoublyLinkedList<ItemType>::displayBackwards() const
@@ -219,9 +273,13 @@ void DoublyLinkedList<ItemType>::displayBackwards() const
             std::cout <<'\n';
         }
     }
-    
 }
 
+/*
+@pre: two doubly linked list with one being passed by reference
+@post:combines both doubly linked list into one
+@return:A doubly linked list
+*/
 //NEED TO FIX!!!!
 template<class ItemType>
 DoublyLinkedList<ItemType> DoublyLinkedList<ItemType>::interleave(const DoublyLinkedList<ItemType>& a_list)

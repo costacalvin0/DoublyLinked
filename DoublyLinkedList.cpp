@@ -27,9 +27,10 @@ DoublyLinkedList<ItemType>::DoublyLinkedList(): headPtr(nullptr), SizeCount(0)
  //NEED TO FIX!!!!
  */
 template<class ItemType>
-DoublyLinkedList<ItemType>::DoublyLinkedList(const DoublyLinkedList<ItemType>& aBag)
+DoublyLinkedList<ItemType>::DoublyLinkedList(DoubleNode<ItemType>* firstNode): headPtr(firstNode), SizeCount(1)
 {
-    DoubleNode<ItemType>* origChainPtr = aBag.headPtr;
+    /*
+     DoubleNode<ItemType>* origChainPtr = aBag.headPtr;
     DoubleNode<ItemType>* newChainPtr = nullptr;
     DoubleNode<ItemType>* currPtr = nullptr;
     
@@ -61,6 +62,7 @@ DoublyLinkedList<ItemType>::DoublyLinkedList(const DoublyLinkedList<ItemType>& a
               }
         }
     SizeCount = aBag.SizeCount;
+     */
 }
 
 

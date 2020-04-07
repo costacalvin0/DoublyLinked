@@ -16,7 +16,7 @@ private:
    
 public:
    DoublyLinkedList(); // Default Constructor
-   DoublyLinkedList(const DoublyLinkedList<ItemType>& aBag); // Copy constructor
+   DoublyLinkedList(DoubleNode<ItemType>* firstNode); // Copy constructor
    virtual ~DoublyLinkedList(); // Destructor
    bool insert(const ItemType& item, const int& position); //inserts a new node at the given position with the item
    bool remove(const int& position); //removes node at the given position
